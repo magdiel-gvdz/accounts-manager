@@ -44,7 +44,7 @@ These require an `Authorization: Bearer <token>` header with a valid access toke
 
 ## Configuration
 
-For simplicity the JWT signing key and database path are hard coded. In a production setting you should load configuration from environment variables or a configuration file.
+For simplicity the JWT signing key and database path are hardcoded. In a production setting you should load configuration from environment variables or a configuration file.
 
 ## Next Steps
 
