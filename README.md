@@ -8,6 +8,14 @@ Accounts Manager is a simple REST API written in Go for managing user accounts. 
 - JWT‑based authentication with access and refresh tokens
 - SQLite database for storage
 
+## Architecture
+
+The project now follows a hexagonal (ports and adapters) architecture. Domain
+models and repository interfaces live under `internal/domain` while business
+logic is implemented in `internal/application`. Infrastructure code such as the
+GORM repository and HTTP handlers reside in `internal/adapters` and
+`internal/handlers` respectively.
+
 ## Requirements
 
 - Go 1.24+
@@ -40,7 +48,7 @@ These require an `Authorization: Bearer <token>` header with a valid access toke
 
 ### Refresh Token
 
-`controllers/userController.go` contains a `RefreshToken` handler for issuing a new access token. A route for it is not currently configured but can be added as needed.
+`internal/handlers/user_handler.go` contains a `RefreshToken` handler for issuing a new access token. A route for it is not currently configured but can be added as needed.
 
 ## Configuration
 
