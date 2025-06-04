@@ -4,21 +4,22 @@ import (
 	"log"
 
 	"github.com/Magdiel-GVdz/accounts-manager/database"
-	"github.com/Magdiel-GVdz/accounts-manager/routes"
+	"github.com/Magdiel-GVdz/accounts-manager/internal/adapters/repository"
+	"github.com/Magdiel-GVdz/accounts-manager/internal/application"
+	"github.com/Magdiel-GVdz/accounts-manager/internal/handlers"
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
-	// Initialize the database connection
 	database.Connect()
 
-	// Create a new Gin router
+	repo := repository.NewGormUserRepository(database.DB)
+	service := application.NewUserService(repo)
+	handler := handlers.NewUserHandler(service)
+
 	router := gin.Default()
+	handler.RegisterRoutes(router)
 
-	// Set up routes
-	routes.UserRoutes(router)
-
-	// Start the server on port 8080
 	if err := router.Run(":8080"); err != nil {
 		log.Fatal("Failed to start server: ", err)
 	}

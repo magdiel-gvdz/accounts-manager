@@ -3,7 +3,7 @@ package database
 import (
 	"log"
 
-	"github.com/Magdiel-GVdz/accounts-manager/models"
+	"github.com/Magdiel-GVdz/accounts-manager/internal/domain"
 	"github.com/glebarez/sqlite"
 	"gorm.io/gorm"
 )
@@ -16,7 +16,7 @@ func Connect() {
 		log.Fatal("failed to connect database")
 	}
 
-	db.AutoMigrate(&models.User{})
+	db.AutoMigrate(&domain.User{})
 	DB = db
 	log.Println("Database connected successfully")
 }
